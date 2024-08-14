@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下载页面</title>
+    <style>
+        /* 下拉列表样式 */
+        #downloadSelect {
+            appearance: none;
+            border: none;
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            font-size: 16px;
+            color: #000;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 5px; /* 添加圆角边框 */
+            display: inline-block; /* 使背景色应用于整个下拉区域 */
+        }
+
+        #downloadSelect:hover, #downloadSelect:focus {
+            background-color: #808080;
+            color: #ffffff;
+        }
+
+        /* 其他样式保持不变 */
+        a {
+    color: #000;
+    text-decoration: none;
+    background-color: #e0e0e0;
+    transition: background-color 0.3s, color 0.3s;
+    display: inline-block;
+    padding: 10px 20px; /* 与下拉列表相同的内边距 */
+    border-radius: 5px; /* 与下拉列表相同的边框圆角 */
+    margin: 0; /* 移除默认的外边距 */
+}
+
+a:hover {
+    background-color: #808080;
+    color: #ffffff;
+}
+
+/* 无序列表样式 */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* 移除默认的外边距 */
+}
+    </style>
+</head>
+<body>
+    <h1>下载页面</h1>
+    <div class="select-container">
+        <select id="downloadSelect">
+            <!-- 选项将在这里添加 -->
+            <option value="project1">Fanqie Novel Downloader</option>
+            <option value="project2">2.21.9</option>
+
+        </select>
+    </div>
+    <p></p>
+    <ul>
+        <li><a href="https://gitdl.cn/https://github.com/qxqycb/Python-Novel-Chapter-Splitter/releases/download/%E5%88%86%E5%89%B2%E5%99%A8/default.exe">小说章节拆分工具</a></li>
+        <!-- 其他链接 -->
+    </ul>
+</body>
+
+<div id="projectDescription" style="display: none;"> <!-- 初始隐藏描述 -->
+        <!-- 描述内容将在这里动态添加 -->
+    </div>
+    <ul>
+        <!-- 你的链接列表 -->
+    </ul>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectElement = document.getElementById("downloadSelect");
+            selectElement.onchange = showDescription;
+        });
+
+        function showDescription() {
+            var description = document.getElementById("projectDescription");
+            var selectedOption = document.getElementById("downloadSelect").value;
+
+            description.innerHTML = ""; // 清空之前的描述
+            if (selectedOption) {
+                description.style.display = "block"; // 显示描述
+
+                // 根据选择的项目更新描述文本
+                switch(selectedOption) {
+                    case "project2":
+                        description.innerHTML = "<p>番茄小说下载器2.21.9</p>" +
+                            '<p>项目地址： <a href="https://github.com/qxqycb/Python-Novel-Downloader-Framework">Fanqie Novel Downloader</a></p>';
+                        break;
+                    // 可以添加更多的case来处理不同的选项
+                }
+            }
+        }
+    </script>
+</html>
