@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>老严专属网站</title>
+    <title>小说下载器</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
     <style>
         body {
@@ -13,196 +14,251 @@
             transition: background-color 0.3s, background-image 0.3s;
         }
 
-        h1{
+        h1 {
             color: #000;
             text-align: center;
         }
 
-        h2{
+        h2 {
             color: #000;
             text-align: left;
         }
 
-        /* 新增的导航栏样式 */
-        .navbar {
-            border: 2px solid #ffffff; /* 添加白色边框 */
-            border-radius: 8px; /* 边框圆角 */
-            padding: 10px; /* 内边距 */
-            background-color: #333; /* 背景颜色 */
+        /* 导航栏样式 */
+       .navbar {
+            border: 2px solid #ffffff;
+            /* 添加白色边框 */
+            border-radius: 8px;
+            /* 边框圆角 */
+            padding: 10px;
+            /* 内边距 */
+            background-color: #333;
+            /* 背景颜色 */
             overflow: hidden;
-            margin: 0 auto; /* 居中显示 */
-            max-width: 960px; /* 导航栏最大宽度 */
+            margin: 0 auto;
+            /* 居中显示 */
+            max-width: 960px;
+            /* 导航栏最大宽度 */
+            transition: transform 0.3s ease;
         }
 
-        .navbar a {
+       .navbar a {
             float: left;
             display: block;
             color: white;
             text-align: center;
             padding: 14px 20px;
             text-decoration: none;
-            border: 1px solid transparent; /* 透明边框，用于悬浮效果 */
-            border-radius: 5px; /* 圆角 */
-            margin: 5px; /* 按钮间间距 */
-            transition: border-color 0.3s, background-color 0.3s; /* 平滑过渡效果 */
+            border: 1px solid transparent;
+            /* 透明边框，用于悬浮效果 */
+            border-radius: 5px;
+            /* 圆角 */
+            margin: 5px;
+            /* 按钮间间距 */
+            transition: border-color 0.3s, background-color 0.3s;
+            /* 平滑过渡效果 */
+            position: relative;
         }
 
-        .navbar a:hover {
-            border-color: #ddd; /* 悬浮时边框颜色 */
-            background-color: #555; /* 悬浮时背景颜色 */
-            color: #ffffff; /* 悬浮时文字颜色 */
+       .navbar a:hover {
+            border-color: #ddd;
+            /* 悬浮时边框颜色 */
+            background-color: #555;
+            /* 悬浮时背景颜色 */
+            color: #ffffff;
+            /* 悬浮时文字颜色 */
+            background: linear-gradient(to right, #4a90e2, #4a90e2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
         }
-#projectSelect {
-    appearance: none;
-    border: none; /* 移除默认边框 */
-    padding: 10px 20px;
-    background-color: #fff;
-    font-size: 16px;
-    color: #555;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.3s; /* 平滑过渡边框颜色变化 */
-}
 
-#projectSelect:hover, #projectSelect:focus {
-    border-color: #4a90e2; /* 鼠标悬浮或聚焦时边框颜色变化 */
-}
+       .navbar a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #4a90e2;
+            transition: width 0.3s ease;
+        }
 
-#projectDescription {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #e7e7e7;
-    border-radius: 5px;
-    display: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加阴影 */
-    transition: all 0.3s ease-in-out; /* 平滑过渡显示和隐藏效果 */
-}
+       .navbar a:hover::after {
+            width: 100%;
+        }
 
-#projectDescription p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #000;
-    text-align: justify; /* 文本两端对齐 */
-}
+        #projectSelect {
+            appearance: none;
+            border: none;
+            /* 移除默认边框 */
+            padding: 10px 20px;
+            background-color: #fff;
+            font-size: 16px;
+            color: #555;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.3s;
+            /* 平滑过渡边框颜色变化 */
+        }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    body {
-        margin: 20px;
-    }
-    h2 {
-        font-size: 18px;
-    }
-    #projectSelect {
-        padding: 8px 15px;
-    }
-    #projectDescription {
-        padding: 15px;
-    }
-}
+        #projectSelect:hover,
+        #projectSelect:focus {
+            border-color: #4a90e2;
+            /* 鼠标悬浮或聚焦时边框颜色变化 */
+        }
+
+        #projectDescription {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #e7e7e7;
+            border-radius: 5px;
+            display: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* 添加阴影 */
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #projectDescription.show {
+            opacity: 1;
+            display: block;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                margin: 20px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            #projectSelect {
+                padding: 8px 15px;
+            }
+
+            #projectDescription {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-<h1>老严专属网站</h1>
+    <h1>小说下载器</h1>
 
-<div class="navbar">
-    <a href="https://qxqycb.github.io/">首页</a>
-    <a href="https://qxqycb.github.io/download">下载</a>
-    <a href="https://qxqycb.github.io/contact">联系方式</a>
-    <a href="https://github.com/qxqycb">关于我</a>
-    <!-- 您可以添加更多的链接 -->
-</div>
+    <div class="navbar">
+        <a href="https://qxqycb.github.io/">首页</a>
+        <a href="https://qxqycb.github.io/download">下载</a>
+        <a href="https://qxqycb.github.io/contact">联系方式</a>
+        <a href="https://github.com/qxqycb">关于我</a>
+        <!-- 您可以添加更多的链接 -->
+    </div>
 
-<h2>以下是我的一些项目:</h2>
-<div class="select-container">
-    <select id="projectSelect" onchange="showDescription()">
-        <option value="">请选择一个项目</option>
-        <option value="project1">Fanqie Novel Downloader</option>
-        <option value="project2">Python Novel Chapter Splitter</option>
-    </select>
-</div>
+    <h2>以下是我的一些项目:</h2>
+    <div class="select-container">
+        <select id="projectSelect" onchange="showDescription()">
+            <option value="">请选择一个项目</option>
+            <option value="project1">Fanqie Novel Downloader</option>
+            <option value="project2">Python Novel Chapter Splitter</option>
+        </select>
+    </div>
 
-<div id="projectDescription">
-    <!-- 初始时不显示任何描述 -->
-</div>
+    <div id="projectDescription">
+        <!-- 初始时不显示任何描述 -->
+    </div>
 
+    <script>
+        // 页面加载完成后设置初始状态
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectElement = document.getElementById("projectSelect");
+            selectElement.onchange = showDescription;
+            // 监听页面滚动事件
+            window.addEventListener('scroll', handleScroll);
+        });
 
+        function showDescription() {
+            var select = document.getElementById("projectSelect");
+            var description = document.getElementById("projectDescription");
+            var selectedProject = select.value;
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 确保DOM完全加载后再绑定事件处理器
-    var selectElement = document.getElementById("projectSelect");
-    selectElement.onchange = showDescription;
-});
-
-function showDescription() {
-    var select = document.getElementById("projectSelect");
-    var description = document.getElementById("projectDescription");
-    var selectedProject = select.value;
-
-    // 根据选择的项目更新描述文本
-    if (selectedProject) {
-        description.style.display = "block"; // 显示描述
-        let descriptionText = "";
-        if (selectedProject === "project1") {
-            descriptionText = "<p>小说下载器2.0.0</p>" +
-            '<p>下载链接： <a href="https://gitdl.cn/https://github.com/qxqycb/Elegent/releases/download/Version-updates/Fanqie-Novel-Downloader.exe" download>Fanqie Novel Downloader</a></p>' +
-"<p>Python脚本使用Selenium库来自动化网页浏览和下载小说，然后使用正则表达式将下载的小说文件分割成单独的章节文件。</p>" +
-"<p>此脚本无下载逻辑，用户可以从油叉下载用于下载番茄小说的脚本，通过篡改猴在浏览器中下载小说，本程序会检测下载的小说文件并分割章节</p>" +
-"<p>导入模块</p>" +
-"<p>selenium：用于自动化Web浏览器操作</p>" +
-"<p>selenium.webdriver.edge.options 和 selenium.webdriver.edge.service：配置Microsoft Edge浏览器选项和启动服务</p>" +
-"<p>os：操作系统功能，如文件路径处理</p>" +
-"<p>re：正则表达式模块，用于文本模式匹配</p>" +
-"<p>设置WebDriver路径</p>" +
-"<p>通过os.path获取脚本所在文件夹的路径，并构造WebDriver的路径，假设msedgedriver.exe位于同一目录下的drivers文件夹</p>" +
-"<p>创建Service和浏览器实例</p>" +
-"<p>使用Service类创建服务对象，启动Edge浏览器</p>" +
-"<p>使用类创建浏览器选项对象，并创建Edge浏览器实例Options</p>" +
-"<p>定义函数</p>" +
-"<p>check_file_downloaded(folder, file_extension='.txt')：检查指定文件夹中是否存在特定扩展名的文件</p>" +
-"<p>split_novel(file_path, pattern)：读取小说文件，使用正则表达式按章节分割，并保存每个章节为单独文本文件</p>" +
-"<p>主函数main</p>" +
-"<p>设置下载文件夹路径(请保证浏览器下载的小说文件地址在C:\Users\Administrator\Downloads)</p>" +
-"<p>打开指定网页（需要替换为正确的小说下载页面URL）</p>" +
-"<p>等待用户在浏览器中下载小说，然后按Enter键继续</p>" +
-"<p>关闭浏览器</p>" +
-"<p>检查下载文件夹中的文件，询问用户是否需要分割小说.txt</p>" +
-"<p>如果用户选择分割，使用函数处理每个下载的文件split_novel</p>";
-
-        } else if (selectedProject === "project2") {
-            descriptionText = "<p>此版本的小说章节分割器是一个Python脚本，它结合了命令行操作和图形用户界面（GUI）的优势，提供了一个用户友好的方式来分割小说文件。</p>" +
-            '<p>项目地址： <a href="https://github.com/qxqycb/Python-Novel-Chapter-Splitter" download>Python-Novel-Chapter-Splitter</a></p>' +
-"<p>以下是此版本的一些关键特性和描述：</p>" +
-"<p>版本特性</p>" +
-"<p>双界面操作：结合了命令行的灵活性和Tkinter GUI的直观性，用户可以通过命令行启动程序，并通过图形界面选择文件和目录</p>" +
-"<p>文件选择：用户可以通过弹出的文件对话框选择要分割的小说文本文件</p>" +
-"<p>目录选择：用户可以通过弹出的目录对话框选择保存分割后章节文件的目标文件夹</p>" +
-"<p>正则表达式匹配：脚本使用正则表达式来识别和提取小说中的章节及其标题</p>" +
-"<p>文件名清洗：自动清理章节标题中的非法字符，确保生成的文件名在文件系统中有效</p>" +
-"<p>章节内容提取：根据章节标题，脚本能够提取每个章节的内容，并保存到独立的文件中</p>" +
-"<p>错误处理：脚本包含了基本的错误处理机制，如文件读取错误、写入错误等，并通过消息框通知用户</p>" +
-"<p>简洁的反馈：在控制台中提供简洁的进度反馈和错误信息</p>" +
-"<p>使用场景</p>" +
-"<p>适用于需要将长篇网络小说分割成单独章节的用户</p>" +
-"<p>适用于需要重命名或重新组织小说文件的用户</p>" +
-"<p>技术栈</p>" +
-"<p>Python：脚本编写的主要语言</p>" +
-"<p>Tkinter：用于创建图形用户界面</p>" +
-"<p>正则表达式（re模块）：用于文本匹配和处理</p>";
-        } else if (selectedProject === "project3") {
-            descriptionText = "<p>这是项目3的详细描述。</p>";
-        } else if (selectedProject === "project4") {
-            descriptionText = "<p>这是项目4的详细描述。</p>";
+            if (selectedProject) {
+                description.style.display = "block";
+                let descriptionText = "";
+                if (selectedProject === "project1") {
+                    descriptionText = "<p>小说下载器2.0.0</p>" +
+                        '<p>下载链接： <a href="https://gitdl.cn/https://github.com/qxqycb/Elegent/releases/download/Version-updates/Fanqie-Novel-Downloader.exe" download>Fanqie Novel Downloader</a></p>' +
+                        "<p>Python脚本使用Selenium库来自动化网页浏览和下载小说，然后使用正则表达式将下载的小说文件分割成单独的章节文件。</p>" +
+                        "<p>此脚本无下载逻辑，用户可以从油叉下载用于下载番茄小说的脚本，通过篡改猴在浏览器中下载小说，本程序会检测下载的小说文件并分割章节</p>" +
+                        "<p>导入模块</p>" +
+                        "<p>selenium：用于自动化Web浏览器操作</p>" +
+                        "<p>selenium.webdriver.edge.options 和 selenium.webdriver.edge.service：配置Microsoft Edge浏览器选项和启动服务</p>" +
+                        "<p>os：操作系统功能，如文件路径处理</p>" +
+                        "<p>re：正则表达式模块，用于文本模式匹配</p>" +
+                        "<p>设置WebDriver路径</p>" +
+                        "<p>通过os.path获取脚本所在文件夹的路径，并构造WebDriver的路径，假设msedgedriver.exe位于同一目录下的drivers文件夹</p>" +
+                        "<p>创建Service和浏览器实例</p>" +
+                        "<p>使用Service类创建服务对象，启动Edge浏览器</p>" +
+                        "<p>使用类创建浏览器选项对象，并创建Edge浏览器实例 Options</p>" +
+                        "<p>定义函数</p>" +
+                        "<p>check_file_downloaded(folder, file_extension='.txt')：检查指定文件夹中是否存在特定扩展名的文件</p>" +
+                        "<p>split_novel(file_path, pattern)：读取小说文件，使用正则表达式按章节分割，并保存每个章节为单独文本文件</p>" +
+                        "<p>主函数main</p>" +
+                        "<p>设置下载文件夹路径(请保证浏览器下载的小说文件地址在 C:\\Users\\Administrator\\Downloads)</p>" +
+                        "<p>打开指定网页（需要替换为正确的小说下载页面 URL）</p>" +
+                        "<p>等待用户在浏览器中下载小说，然后按 Enter 键继续</p>" +
+                        "<p>关闭浏览器</p>" +
+                        "<p>检查下载文件夹中的文件，询问用户是否需要分割小说.txt</p>" +
+                        "<p>如果用户选择分割，使用函数处理每个下载的文件 split_novel</p>";
+                } else if (selectedProject === "project2") {
+                    descriptionText = "<p>此版本的小说章节分割器是一个 Python 脚本，它结合了命令行操作和图形用户界面（GUI）的优势，提供了一个用户友好的方式来分割小说文件。</p>" +
+                        '<p>项目地址： <a href="https://github.com/qxqycb/Python-Novel-Chapter-Splitter" download>Python-Novel-Chapter-Splitter</a></p>' +
+                        "<p>以下是此版本的一些关键特性和描述：</p>" +
+                        "<p>版本特性</p>" +
+                        "<p>双界面操作：结合了命令行的灵活性和 Tkinter GUI 的直观性，用户可以通过命令行启动程序，并通过图形界面选择文件和目录</p>" +
+                        "<p>文件选择：用户可以通过弹出的文件对话框选择要分割的小说文本文件</p>" +
+                        "<p>目录选择：用户可以通过弹出的目录对话框选择保存分割后章节文件的目标文件夹</p>" +
+                        "<p>正则表达式匹配：脚本使用正则表达式来识别和提取小说中的章节及其标题</p>" +
+                        "<p>文件名清洗：自动清理章节标题中的非法字符，确保生成的文件名在文件系统中有效</p>" +
+                        "<p>章节内容提取：根据章节标题，脚本能够提取每个章节的内容，并保存到独立的文件中</p>" +
+                        "<p>错误处理：脚本包含了基本的错误处理机制，如文件读取错误、写入错误等，并通过消息框通知用户</p>" +
+                        "<p>简洁的反馈：在控制台中提供简洁的进度反馈和错误信息</p>" +
+                        "<p>使用场景</p>" +
+                        "<p>适用于需要将长篇网络小说分割成单独章节的用户</p>" +
+                        "<p>适用于需要重命名或重新组织小说文件的用户</p>" +
+                        "<p>技术栈</p>" +
+                        "<p>Python：脚本编写的主要语言</p>" +
+                        "<p>Tkinter：用于创建图形用户界面</p>" +
+                        "<p>正则表达式（re 模块）：用于文本匹配和处理</p>";
+                } else if (selectedProject === "project3") {
+                    descriptionText = "<p>这是项目 3 的详细描述。</p>";
+                } else if (selectedProject === "project4") {
+                    descriptionText = "<p>这是项目 4 的详细描述。</p>";
+                }
+                description.innerHTML = descriptionText;
+                description.classList.add('show');
+            } else {
+                description.style.display = "none";
+                description.classList.remove('show');
+            }
         }
-        description.innerHTML = descriptionText;
-    } else {
-        description.style.display = "none"; // 隐藏描述
-    }
-}
-</script>
+
+        function handleScroll() {
+            const navbar = document.querySelector('.navbar');
+            const scrollPosition = window.scrollY;
+            if (scrollPosition > 50) {
+                navbar.style.transform = 'translateY(-50px)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+        }
+    </script>
 
 </body>
+
 </html>
