@@ -25,7 +25,7 @@
         }
 
         /* 导航栏样式 */
-       .navbar {
+      .navbar {
             border: 2px solid #ffffff;
             /* 添加白色边框 */
             border-radius: 8px;
@@ -42,7 +42,7 @@
             transition: transform 0.3s ease;
         }
 
-       .navbar a {
+      .navbar a {
             float: left;
             display: block;
             color: white;
@@ -60,7 +60,7 @@
             position: relative;
         }
 
-       .navbar a:hover {
+      .navbar a:hover {
             border-color: #ddd;
             /* 悬浮时边框颜色 */
             background-color: #555;
@@ -73,7 +73,7 @@
             transition: all 0.3s ease;
         }
 
-       .navbar a::after {
+      .navbar a::after {
             content: "";
             position: absolute;
             bottom: -2px;
@@ -84,7 +84,7 @@
             transition: width 0.3s ease;
         }
 
-       .navbar a:hover::after {
+      .navbar a:hover::after {
             width: 100%;
         }
 
@@ -145,13 +145,34 @@
                 padding: 15px;
             }
         }
+
+        /* 打字效果样式 */
+        #typingEffectText {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #000;
+            font-size: 24px; /* 加大字体 */
+            margin-top: 20px;
+            text-align: center; /* 居中显示 */
+        }
+
+      .cursor {
+    animation: blink 1s infinite;
+    position: relative;
+    left: 5px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
     </style>
 </head>
 
 <body>
 
-    <h1>小说下载器</h1>
-    <p>作者:YQY & YCK</p>
+    <p id="typingEffectText"></p>
+
     <div class="navbar">
         <a href="https://qxqycb.github.io/">首页</a>
         <a href="https://qxqycb.github.io/download">下载</a>
@@ -175,13 +196,37 @@
     </div>
 
     <script>
-        // 页面加载完成后设置初始状态
-        document.addEventListener('DOMContentLoaded', function () {
-            var selectElement = document.getElementById("projectSelect");
-            selectElement.onchange = showDescription;
-            // 监听页面滚动事件
-            window.addEventListener('scroll', handleScroll);
-        });
+
+// 页面加载完成后设置初始状态
+document.addEventListener('DOMContentLoaded', function () {
+    var selectElement = document.getElementById("projectSelect");
+    selectElement.onchange = showDescription;
+    // 监听页面滚动事件
+    window.addEventListener('scroll', handleScroll);
+
+    // 打字效果
+    const textToType = "欢迎使用小说下载器,此项目基于Python开发  作者：YQY & YCK";
+    let index = 0;
+    const typingEffectText = document.getElementById('typingEffectText');
+
+    function typeNextCharacter() {
+        if (index < textToType.length) {
+            if (textToType[index] === '\n') {
+                typingEffectText.innerHTML += '<br>';
+            } else {
+                typingEffectText.textContent += textToType[index];
+            }
+            if (index === textToType.length - 1) {
+                typingEffectText.classList.add('cursor');
+                typingEffectText.innerHTML += '<span class="cursor">|</span>';
+            }
+            index++;
+            setTimeout(typeNextCharacter, 200); // 调整这里的时间间隔来控制打字速度
+        }
+    }
+
+    typeNextCharacter();
+});
 
         function showDescription() {
             var select = document.getElementById("projectSelect");
